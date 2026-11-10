@@ -20,33 +20,34 @@ To execute this sex-chromosome dosage analysis, I processed the raw whole-genome
 
 ### Step 1: Quality Control (FastQ
 * **Objective:** Assess the sequencing quality, per-base sequence quality scores, GC content distribution, and adapter contamination of the raw paired-end reads (`ERR4539746`).
-* **Tool Used:** `FastQC` (Version 0.73+
+* **Tool Used:** `FastQC` 
 * **Execution Details:**
   * I imported the raw sequencing reads from the NCBI SRA via accession `ERR4539746`
   * I executed FastQC independently on both read files and inspected the output reports to confirm high read integrity prior to alignment
-* **Screenshot:** *(Insert FastQC quality report screenshot here)
-  `![FastQC Report](figures/FAST QC.jpg)
+* **Screenshot:** 
+  `![FastQC Report](figures/FASTQC.jpg)
+  
 
 ### Step 2: Read Alignment (BWA-MEM
 * **Objective:** Align the quality-checked paired-end Illumina reads against the chromosome-level reference genome assembly of the guppy, *Poecilia reticulata* (`GCF_904066995.2`)[cite: 8], to generate accurate genomic coordinates.
 * **Tool Used:** `BWA-MEM2` (Map genomic reads against reference genome
-* **Execution Details:*
+* **Execution Details:**
   * **Reference Genome Source:** I used the NCBI RefSeq assembly `GCF_904066995.2` (`PRJEB36704`)
   * **Input Type:** Paired-end dataset (Forward and Reverse FASTQ files)
   * **Algorithm Options:** I applied default BWA-MEM2 settings optimized for Illumina short reads, which produced a coordinate-sorted Binary Alignment Map (`.bam`) file containing alignment scores, mapping qualities (`MAPQ`), and cigar strings
-* **Screenshot:** *(Insert BWA-MEM2 execution and output BAM file screenshot here)
+* **Screenshot:** 
   `![BWA Alignment](figures/BWA-MEM2.jpg)
 
 
 ### Step 3: Read Depth Calculation (Samtools Coverag
 * **Objective:** Calculate per-scaffold sequencing depth, breadth of coverage, and mapping metrics across all reference chromosomes to establish baseline autosomal coverage and evaluate sex-chromosome dosage.
 * **Tool Used:** `Samtools coverage` 
-* **Execution Details:*
+* **Execution Details:**
   * **Input File:** I used the coordinate-sorted BAM file generated from Step 2
   * **Filtering Parameters:** I retained alignments meeting standard mapping quality thresholds (`MAPQ >= 20`) to filter out multi-mapping reads, repetitive elements, and low-confidence alignments
   * **Output Generation:** I exported the resulting tabular summary as `chromosome_coverage.tsv`, containing scaffold identifiers (`rname`), sequence lengths (`startpos` to `endpos`), total mapped reads (`numreads`), fraction of covered bases (`coverage`), and mean sequencing depth (`meandepth`)
-* **Screenshot:** *(Insert Samtools coverage tabular output screenshot here)
-  `![Samtools Coverage](figures/SAMTOOLS COVERAGE.jpg)
+* **Screenshot:** 
+  `![Samtools Coverage](figures/SAMTOOLSCOVERAGE.jpg)
 
 
 ## 5. Chromosome Group Selection & Justification (`chromosome_groups.csv`)
