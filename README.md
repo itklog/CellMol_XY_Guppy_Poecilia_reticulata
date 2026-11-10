@@ -5,10 +5,10 @@
 * **Study Question:** Can whole-genome sequencing (WGS) read depth mapping across chromosome-level reference assemblies accurately infer sex-chromosome dosage and heterogametic sex complements in a teleost fish with homomorphic sex chromosomes.
 
 ## 2. Accession & Metadata Links
-* **Reference Genome Assembly:** [GCF_904066995.2 (PRJEB36704)](https://www.ncbi.nlm.nih.gov/assembly/GCF_904066995.2)[cite: 8]
-* **WGS Sequencing Run (SRA):** [ERR4539746](https://www.ncbi.nlm.nih.gov/sra/ERR4539746[accn])[cite: 7, 8]
-* **Assembly BioSample:** `SAMEA6533017`[cite: 8]
-* **WGS SRA BioSample:** `SAMEA6542947`[cite: 7]
+* **Reference Genome Assembly:** [GCF_904066995.2 (PRJEB36704)](https://www.ncbi.nlm.nih.gov/assembly/GCF_904066995.2.
+* **WGS Sequencing Run (SRA):** [ERR4539746](https://www.ncbi.nlm.nih.gov/sra/ERR4539746[accn])
+* **Assembly BioSample:** `SAMEA6533017`
+* **WGS SRA BioSample:** `SAMEA6542947`
 
 ## 3. Galaxy Workflow & History Link
 * **Galaxy Public History:** [View Galaxy History](https://usegalaxy.org/u/eugene_7/h/xy-dosage-reticulata)
@@ -20,29 +20,28 @@ To execute this sex-chromosome dosage analysis, I processed the raw whole-genome
 
 ### Step 1: Quality Control (FastQ
 * **Objective:** Assess the sequencing quality, per-base sequence quality scores, GC content distribution, and adapter contamination of the raw paired-end reads (`ERR4539746`).
-* **Tool Used:** `FastQC` (Version 0.73+
+* **Tool Used:** `FastQC` 
 * **Execution Details:**
   * I imported the raw sequencing reads from the NCBI SRA via accession `ERR4539746`
   * I executed FastQC independently on both read files and inspected the output reports to confirm high read integrity prior to alignment
 * **Screenshot:** *(Insert FastQC quality report screenshot here)
-  `![FastQC Report](screenshots/fastqc_report.png)
+  `[FastQC Report](screenshots/fastqc_report.png)
 
 
 ### Step 2: Read Alignment (BWA-MEM
 * **Objective:** Align the quality-checked paired-end Illumina reads against the chromosome-level reference genome assembly of the guppy, *Poecilia reticulata* (`GCF_904066995.2`)[cite: 8], to generate accurate genomic coordinates.
-* **Tool Used:** `BWA-MEM2` (Map genomic reads against reference genome
+* **Tool Used:** `BWA-MEM2` (Map genomic reads against reference genome)
 * **Execution Details:*
   * **Reference Genome Source:** I used the NCBI RefSeq assembly `GCF_904066995.2` (`PRJEB36704`)
   * **Input Type:** Paired-end dataset (Forward and Reverse FASTQ files)
   * **Algorithm Options:** I applied default BWA-MEM2 settings optimized for Illumina short reads, which produced a coordinate-sorted Binary Alignment Map (`.bam`) file containing alignment scores, mapping qualities (`MAPQ`), and cigar strings
 * **Screenshot:** *(Insert BWA-MEM2 execution and output BAM file screenshot here)
-  `![BWA Alignment](screenshots/bwa_alignment.png)
+  `[BWA Alignment](screenshots/bwa_alignment.png)
 
--
 
 ### Step 3: Read Depth Calculation (Samtools Coverag
 * **Objective:** Calculate per-scaffold sequencing depth, breadth of coverage, and mapping metrics across all reference chromosomes to establish baseline autosomal coverage and evaluate sex-chromosome dosage.
-* **Tool Used:** `Samtools coverage` (Version 1.15+
+* **Tool Used:** `Samtools coverage` 
 * **Execution Details:*
   * **Input File:** I used the coordinate-sorted BAM file generated from Step 2
   * **Filtering Parameters:** I retained alignments meeting standard mapping quality thresholds (`MAPQ >= 20`) to filter out multi-mapping reads, repetitive elements, and low-confidence alignments
