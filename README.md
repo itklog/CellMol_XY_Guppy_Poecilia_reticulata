@@ -67,7 +67,7 @@ To execute this sex-chromosome dosage analysis, I processed the raw whole-genome
 * **X:A Ratio:** `1.03`
 * **Inferred Complement:** **XX-like**
 * **Generated Figure:**  
-  `![Chromosome Depth Plot](results/chromosome_depth.png)`
+  `![Chromosome Depth Plot](results/chromosome_depth.png)
 
 
 ## 8. Lab Report Questions & Answers
