@@ -18,7 +18,7 @@
 To execute this sex-chromosome dosage analysis, I processed the raw whole-genome sequencing (WGS) reads through a standardized bioinformatics pipeline within my public Galaxy instance ([usegalaxy.org/u/eugene_7/h/xy-dosage-reticulata](https://usegalaxy.org/u/eugene_7/h/xy-dosage-reticulata)). Below are the detailed steps, parameter settings, and tool executions I performe
 
 
-### Step 1: Quality Control (FastQ
+### Step 1: Quality Control (FastQC)
 * **Objective:** Assess the sequencing quality, per-base sequence quality scores, GC content distribution, and adapter contamination of the raw paired-end reads (`ERR4539746`).
 * **Tool Used:** `FastQC` 
 * **Execution Details:**
@@ -28,7 +28,7 @@ To execute this sex-chromosome dosage analysis, I processed the raw whole-genome
   `![FastQC Report](figures/FASTQC.jpg)
   
 
-### Step 2: Read Alignment (BWA-MEM
+### Step 2: Read Alignment (BWA-MEM2)
 * **Objective:** Align the quality-checked paired-end Illumina reads against the chromosome-level reference genome assembly of the guppy, *Poecilia reticulata* (`GCF_904066995.2`)[cite: 8], to generate accurate genomic coordinates.
 * **Tool Used:** `BWA-MEM2` (Map genomic reads against reference genome
 * **Execution Details:**
@@ -39,7 +39,7 @@ To execute this sex-chromosome dosage analysis, I processed the raw whole-genome
   `![BWA Alignment](figures/BWA-MEM2.jpg)
 
 
-### Step 3: Read Depth Calculation (Samtools Coverag
+### Step 3: Read Depth Calculation (Samtools Coverage)
 * **Objective:** Calculate per-scaffold sequencing depth, breadth of coverage, and mapping metrics across all reference chromosomes to establish baseline autosomal coverage and evaluate sex-chromosome dosage.
 * **Tool Used:** `Samtools coverage` 
 * **Execution Details:**
@@ -56,7 +56,7 @@ To execute this sex-chromosome dosage analysis, I processed the raw whole-genome
 * **Exclusions:** Unplaced scaffolds (`NW_...`) and mitochondrial DNA (`NC_024238.1`) were excluded to prevent skewing median autosomal depth.
 
 
-## 6. Analysis Scripts & Data Files (Uploaded in Repo)
+## 6. Analysis Scripts & Data Files
 * `chromosome_coverage.tsv` — Samtools coverage tabular output.
 * `chromosome_groups.csv` — Chromosome classification key.
 * `sex_depth_analysis.R` — Automated R analysis and plotting script.
@@ -102,4 +102,5 @@ A chromosome-level FASTA reference only provides static sequence coordinates wit
 Although the pipeline categorized the sample as **XX-like**, this reflects inherent technical limitations of short-read depth analyses in teleost fish. *Poecilia reticulata* possesses an evolutionary young, homomorphic sex chromosome system with high nucleotide sequence homology and pseudoautosomal regions (PARs). Short-read mapping across these conserved regions leads to ambiguous read assignment and mapping bias, artificially inflating apparent sex-chromosome depth toward diploid parity ($1.0$). Therefore, coverage ratios serve as preliminary quantitative estimators rather than definitive cytogenetic proofs.
 
 ## 10. References
-* Fraser, B. A., et al. (2020). Improved Reference Genome Uncovers Novel Sex-Linked Regions in the Guppy (*Poecilia reticulata*). *Genome Biology and Evolution*, 12(10), 1789–1805.
+
+* Fraser, B. A., Whiting, J. R., Paris, J. R., Weadick, C. J., Parsons, P. J., Charlesworth, D., Bergero, R., Bemm, F., Hoffmann, M., Kottler, V. A., Liu, C., Dreyer, C., & Weigel, D. (2020). Improved Reference Genome Uncovers Novel Sex-Linked Regions in the Guppy (*Poecilia reticulata*). *Genome biology and evolution*, 12(10), 1789–1805. https://doi.org/10.1093/gbe/evaa187
