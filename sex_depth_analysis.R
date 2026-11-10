@@ -1,5 +1,3 @@
-# Sex-chromosome dosage from whole-genome DNA read depth
-# Input: Samtools coverage TSV + student chromosome labels
 cov <- read.delim("chromosome_coverage.tsv", comment.char = "",
 check.names = FALSE, stringsAsFactors = FALSE)
 names(cov)[1] <- "rname" # Accepts the '#rname' header
