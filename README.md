@@ -29,7 +29,7 @@ To execute this sex-chromosome dosage analysis, I processed the raw whole-genome
   
 
 ### Step 2: Read Alignment (BWA-MEM2)
-* **Objective:** Align the quality-checked paired-end Illumina reads against the chromosome-level reference genome assembly of the guppy, *Poecilia reticulata* (`GCF_904066995.2`)[cite: 8], to generate accurate genomic coordinates.
+* **Objective:** Align the quality-checked paired-end Illumina reads against the chromosome-level reference genome assembly of the guppy, *Poecilia reticulata* (`GCF_904066995.2`), to generate accurate genomic coordinates.
 * **Tool Used:** `BWA-MEM2` (Map genomic reads against reference genome
 * **Execution Details:**
   * **Reference Genome Source:** I used the NCBI RefSeq assembly `GCF_904066995.2` (`PRJEB36704`)
